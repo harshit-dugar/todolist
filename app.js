@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
 const _ = require('lodash'); //convert string to title case
 
 const app = express();
@@ -9,7 +11,8 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // to use css files
 //connecting to mongodb
-mongoose.connect("mongodb+srv://admin:_root@cluster0.sgcylws.mongodb.net/TodolistDB?retryWrites=true&w=majority",{useNewUrlParser: true});
+const pass = process.env.MONGODB_ADMIN_PASS;
+mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true});
 
 
 //MongoDB
